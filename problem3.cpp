@@ -6,13 +6,8 @@ Build an image of the field. */
 
 #include <iostream>
 
-
-// void updateIndeces(int array[n][m]) {
-
-// }
-
-int main() {
-    int n, m, k;
+void printMines(char* mines) {
+int n, m, k;
     int counter = 0;
     std::cin >> n >> m >> k;
 
@@ -21,15 +16,12 @@ int main() {
         array[i] = new int[m];
     }
 
-    // for (int i = 0; i < k; i++)
-
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             array[i][j] = '0';
 
         }
     }
-
 
     while (counter < k) {
         int x, y;
@@ -38,7 +30,37 @@ int main() {
         counter++;
     }
 
-    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (array[i][j] == '*') {
+                if ((i - 1 >= 0) && (array[i - 1][j] != '*')) {
+                    array[i - 1][j] += 1;
+                }
+                if ((i + 1 < n) && (array[i + 1][j] != '*')) {
+                    array[i + 1][j] += 1;
+                }
+                if ((j - 1 >= 0) && (array[i][j - 1] != '*')) {
+                    array[i][j - 1] += 1;
+                }
+                if ((j + 1 < m) && (array[i][j + 1] != '*')) {
+                    array[i][j + 1] += 1;
+                }
+                
+                if ((i - 1 >= 0) && (j - 1 >= 0) && (array[i - 1][j - 1] != '*')) {
+                    array[i - 1][j - 1] += 1;
+                }
+                if ((i + 1 < n) && (j + 1 < m) && (array[i + 1][j + 1] != '*')) {
+                    array[i + 1][j + 1] += 1;
+                }
+                if ((i - 1 >= 0) && (j + 1 < m) && (array[i - 1][j + 1] != '*')) {
+                    array[i - 1][j + 1] += 1;
+                }
+                if ((i + 1 < n) && (j - 1 >= 0) && (array[i + 1][j - 1] != '*')) {
+                    array[i + 1][j - 1] += 1;
+                }
+            }
+        }
+    }
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -46,5 +68,9 @@ int main() {
         }
             std::cout << '\n'; 
     }
+}
+
+int main() {
+    
 
 }
